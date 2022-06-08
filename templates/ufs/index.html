@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'partials/_menu.html' %}
+
+    <!-- ##### Best Receipe Area Start ##### -->
+    <section class="best-receipe-area">
+        <div class="container">
+            <div class="row">
+                <table class="table table-sm table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Sigla</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if ufs %}
+                        {% for uf in ufs  %}
+                            <tr>
+                                <th scope="row"> {{ uf.id }} </th>
+                                <td> {{ uf.uf_name }} </td>
+                                <td> {{ uf.uf_initials }} </td>
+                                <td> ### </td>
+                            </tr>
+                        {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Best Receipe Area End ##### -->
+
+    <!-- ##### Pagination ##### -->
+    <section class="top-catagory-area section-padding-20-0">
+        <div class="container">
+            {% if ufs.has_other_pages %}
+            <ul class="pagination">
+                {% if ufs.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ ufs.previous_page_number }}" class="page-link">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&laquo;</a>
+                </li>
+                {% endif %}
+                {% for page in ufs.paginator.page_range %}
+                {% if  ufs.number == page %}
+                <li class="page-item active">
+                    <a class="page-link">{{ page }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a href="?page={{ page }}" class="page-link">{{ page }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if ufs.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ ufs.next_page_number }}" class="page-link">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">&raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </div>
+    </section>
+    <!-- ##### Pagination End ##### -->
+
+    {% include 'partials/_footer.html' %}
+{% endblock content %}
