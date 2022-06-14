@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% include 'partials/_menu.html' %}
+
+    <div class="contact-area section-padding-0-80">
+        <div class="container position-absolute top-50 start-50 translate-middle">
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <div class="section-heading">
+                        <h2>Login</h2>
+                    </div>
+                </div>
+            </div>
+            {% include 'partials/_alertas.html' %}
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                    <div class="contact-form-area">
+                        <form action="#" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 col-lg-12">
+                                    <br>
+                                    <label for="matricula"><b>Matrícula</b></label>
+                                    <input type="text" id="matricula" class="form-control" name="matricula" placeholder="Entre com a matrícula do usuário">
+                                </div>
+                                <div class="col-12 col-lg-12">
+                                    <br>
+                                    <label for="senha"><b>Senha</b></label>
+                                    <input id="senha" type="password" class="form-control" name="senha" placeholder="Digite aqui sua senha">
+                                </div>
+                                <div class="col-12 text-center">
+                                    <br>
+                                    <button class="btn btn-success" type="submit">Entrar</button>
+                                    <div class="vr"></div>
+                                    <button type="button" class="btn btn-primary" onclick="exibirCriarConta()">Esqueci minha senha</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    function exibirCriarConta()
+    {
+         location.href = "#";
+    } 
+    </script>
+
+    {% include 'partials/_footer.html' %}
+{% endblock content %}
