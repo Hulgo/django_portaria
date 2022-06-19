@@ -10,6 +10,7 @@
     <section class="best-receipe-area">
         <div class="container">
             <div class="row">
+                <button class="btn btn-success" onclick="create_uf()">Novo</button>
                 <table class="table table-sm table-striped table-hover">
                     <thead>
                         <tr>
@@ -26,7 +27,15 @@
                                 <th scope="row"> {{ uf.id }} </th>
                                 <td> {{ uf.uf_name }} </td>
                                 <td> {{ uf.uf_initials }} </td>
-                                <td> ### </td>
+                                <td> 
+                                    <a href="{% url 'edit_uf' uf.id %}" type="button" class="btn btn-info">
+                                        Editar
+                                    </a>
+                                    <div class="vr"></div>
+                                    <a href="{% url 'delete_uf' uf.id %}" type="button" class="btn btn-danger">
+                                        Deletar
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                         {% else %}
@@ -78,6 +87,13 @@
         </div>
     </section>
     <!-- ##### Pagination End ##### -->
+    <script>
+        function create_uf()
+        {
+            location.href = "{% url 'create_uf' %}";
+        } 
+    </script>
+
 
     {% include 'partials/_footer.html' %}
 {% endblock content %}

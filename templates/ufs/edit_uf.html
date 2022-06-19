@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load widget_tweaks %}
+
+    {% include 'partials/_menu.html' %}
+    <section class="container col-8">
+        <form action="{% url 'update_uf' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" id="id" class="form-control" name="id" value="{{uf.id}}" hidden>
+            {% for field in form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field | add_class:'form-control' | attr:'value= " uf.uf_name "'  }}
+                </div>
+                {% for error in field.errors %}
+                    <section class="alert alert-danger" role="alert">
+                        {{ field.errors }}
+                    </section>
+                {% endfor %}
+            {% endfor %}
+            <input type="submit" value="OK" class="btn btn-success">
+        </form>
+    </section>
+{% endblock content %}
